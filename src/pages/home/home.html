@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Accueil
+    </ion-title>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+      <ion-card-header class="myCardHeader">Contact</ion-card-header>
+      <ion-card-content padding>
+          <p>Nom du contact: <strong>{{contact.nom}}</strong> </p>
+          <p>Email du contact: <strong>{{contact.email}}</strong> </p>
+          <img src="{{contact.photo}}">
+      </ion-card-content>
+  </ion-card>
+</ion-content>

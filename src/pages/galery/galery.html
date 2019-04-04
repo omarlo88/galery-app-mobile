@@ -1,0 +1,76 @@
+<!--
+  Generated template for the GaleryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Mes Galeries</ion-title>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div padding>
+        <ion-item>
+            <ion-label floating>Saisissez le nom de la ville</ion-label>
+            <!-- <ion-input type="text" placeholder="Saisissez le nom de la ville"></ion-input> -->
+            <ion-input (input)="setMode()" name="nomVille" type="text" [(ngModel)]="nomVille"></ion-input>
+        </ion-item>
+        <button ion-button block (click)="onRecherche()">Rechercher</button>
+    </div>
+    <div *ngIf="mode == 1">
+        <ion-card *ngFor="let p of listePhotos?.hits">
+            <ion-card-header class="myCardHeader">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="{{p.userImageURL}}">
+                    </ion-avatar>
+                    <h2>{{p.user}}</h2>
+                    <p>{{p.user_id}}</p>
+                </ion-item>
+            </ion-card-header>
+            <img src="{{p.previewURL}}" (click)="onDetailImage(p)">
+            <ion-card-content>
+                <p>Tags: <strong>{{p.tags}}</strong></p>
+                <p>Height: <strong>{{p.imageHeight}}</strong></p>
+                <p>Width: <strong>{{p.imageWidth}}</strong></p>
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="thumbs-up"></ion-icon>
+                        <div>{{p.likes}} Likes</div>
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="text"></ion-icon>
+                        <div>{{p.comments}} Commentaires</div>
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="download"></ion-icon>
+                        <div>{{p.downloads}} Downloads</div>
+                    </button>
+                </ion-col>
+                <ion-col padding>
+                    <ion-note>
+                        {{p.views}} views
+                    </ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+    <div *ngIf="mode == 2">
+        <span>Aucune donnée trouvée!!</span>
+    </div>
+
+</ion-content>
